@@ -1,18 +1,25 @@
 import dropbox
 import os
+import sys
 
-MY_ACCESS_TOKEN=''
+MY_ACCESS_TOKEN=os.environ['DROPBOX_ACCESS_TOKEN'];
 INTERVIEW_DIRECTORY='/Everyone/Interviewing/interviews'
 
 dbx = dropbox.Dropbox(MY_ACCESS_TOKEN)
 
-interviewee = input("What is the name of the candidate?\n")
+interviewee = sys.argv[1];
+autoMode = sys.argv[1] is not None
+
+if not autoMode:
+    interviewee = input("What is the name of the candidate?\n")
+
 folder_name = interviewee.replace(' ', '-').lower()
 file_request_title = "Technical Interview - {}".format(interviewee)
 folder_path = os.path.join(INTERVIEW_DIRECTORY, folder_name)
 existing_folder = None
 
-input("\nCreating folder: {}\nCreating file request: {}\nPress enter to continue. ".format(folder_path, file_request_title))
+if not autoMode:
+    input("\nCreating folder: {}\nCreating file request: {}\nPress enter to continue. ".format(folder_path, file_request_title))
 
 try:
     existing_folder = dbx.files_get_metadata(folder_path)
@@ -24,7 +31,7 @@ except dropbox.exceptions.ApiError as e:
         print("\nUnhandled exception {}".format(e))
         quit()
 
-if existing_folder is not None:
+if existing_folder is not None and not autoMode:
     use_existing = input("\nExisting folder named {} found. Do you want to use this folder and continue? (y/n) ".format(existing_folder.name))
     if use_existing.lower()[0] == 'n':
         quit()
