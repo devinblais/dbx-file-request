@@ -20,4 +20,4 @@ function createRequest() {
 }
 ```
 
-Now you can just run `createRequest first-last` and it will poop out the request url for you!
+Now you can just run `createRequest "First Last"` and it will poop out the request url for you!
