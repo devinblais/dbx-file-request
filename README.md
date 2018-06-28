@@ -16,7 +16,7 @@ Use this script to quickly create a dropbox file request for technical interview
 ```
  # File Request Creator
 function createRequest() {
-  python /path/to/create_request.py "$1"
+  python /path/to/create_request.py "${1}"
 }
 ```
 
