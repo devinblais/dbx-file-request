@@ -16,8 +16,8 @@ Use this script to quickly create a dropbox file request for technical interview
 ```
  # File Request Creator
 function createRequest() {
-  python /path/to/create_request.py "$1"
+  python /path/to/create_request.py "${1}"
 }
 ```
 
-Now you can just run `createRequest first-last` and it will poop out the request url for you!
+Now you can just run `createRequest "First Last"` and it will poop out the request url for you!

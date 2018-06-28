@@ -2,16 +2,17 @@ import dropbox
 import os
 import sys
 
-MY_ACCESS_TOKEN=os.environ['DROPBOX_ACCESS_TOKEN'];
+MY_ACCESS_TOKEN=os.environ['DROPBOX_ACCESS_TOKEN']
 INTERVIEW_DIRECTORY='/Everyone/Interviewing/interviews'
 
 dbx = dropbox.Dropbox(MY_ACCESS_TOKEN)
 
-interviewee = sys.argv[1];
-autoMode = sys.argv[1] is not None
+autoMode = len(sys.argv) > 1
 
 if not autoMode:
     interviewee = input("What is the name of the candidate?\n")
+else:
+    interviewee = sys.argv[1]
 
 folder_name = interviewee.replace(' ', '-').lower()
 file_request_title = "Technical Interview - {}".format(interviewee)
